@@ -65,7 +65,65 @@ console.log(vegetables.at(-1));
 
 // Methods pop/push, shift/unshift
 
+// a queue is one of the most common uses of an array. in CS this means an ordered collection of elements which
+// supports two operations: 
+
+// - push appends element to an end
+// - shift get an element from the beginning, advancing the queue, so that 2nd element becomes the 1st
+
+
+// a stack is the data structure and another case for arrays:
+// it supports 2 operations:
+
+// - push adds an element to the end
+// - pop takes an element from the end
+
+// so new elemetns are added or taken from the "end". 
+
+// - for stacks, the latest pushed item is received firs, its called LIFO (Last-In-First-Out)
+// - for queuesm its FIFO (First-In-First-Out)
+
+
+// methods that work with the end of the array:
 
 
 
 
+// pop - extracts the last element of the array and returns it:
+
+let planets = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptun"]
+console.log(planets.pop()); // Neptun
+console.log(planets); // ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus']
+console.log(planets.at(-1)); // Uranus
+console.log(planets); // ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus']
+// both methods above return value of last element of array, but difference is that pop() modifies array
+
+
+// push - append the element to the end of the array
+
+planets.push("Neptun"); // pushes Neptun back to array
+console.log(planets); // ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptun']
+
+
+// shift - extracts the first element of the array and returns it:
+
+console.log(planets.shift()); // Mercury
+console.log(planets); // ['Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptun']
+
+
+//unshift - add the element to the beginning of the array:
+
+planets.unshift("Mercury"); 
+console.log(planets); // ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptun']
+
+
+// methods push and unshift can add multiple elements at once:
+
+planets.push("Pluto");
+planets.unshift("Sun");
+
+console.log(planets); // ['Sun', 'Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptun', 'Pluto']
+
+
+
+// Internals
