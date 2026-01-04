@@ -69,8 +69,7 @@ for (let k = 2; k <= 10; k++) {
 // Rewrite the code changing the for loop to while without altering its behavior (the output should stay same).
 
 for (let p = 0; p < 3; p++) {
-    console.log
-        (`number ${p}!`);
+    console.log(`number ${p}!`);
 }
 
 let j = 0;
@@ -107,14 +106,14 @@ while (input <= 100 && input) { // && input used for the cases where number more
 // For n = 10 the result will be 2,3,5,7.
 // P.S. The code should work for any n, not be hard-tuned for any fixed value.
 
+
 let n = 10;
 
 primeNum:
-for (let i = 2; i <= n; i++){
-    for (let j = 2; j < i; j++){
+for (let i = 2; i <= n; i++) {
+    for (let j = 2; j < i; j++) {
         if (i % j == 0) continue primeNum;
     }
-console.log(i);
-
-    }
+    console.log(i);
+}
 
