@@ -2,7 +2,7 @@
 
 // JS.info
 
-// arrays needed to store ordered collections of elemetns (users, goods, etc).
+// arrays needed to store and manage ordered collections of elemetns (users, goods, etc).
 
 // let arr = new Array ();  - basic syntax of creating array
 
@@ -57,7 +57,7 @@ let autos = [
 // old way to get specifi element (lets say last) was to calculate specific elemet index and then access it:
 
 let vegetables = ["Cucumber", "Tomato", "Onion"];
-console.log(vegetables [vegetables.length - 1]); // Onion
+console.log(vegetables[vegetables.length - 1]); // Onion
 
 // but now we have shorter syntax
 console.log(vegetables.at(-1));
@@ -113,7 +113,7 @@ console.log(planets); // ['Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus
 
 //unshift - add the element to the beginning of the array:
 
-planets.unshift("Mercury"); 
+planets.unshift("Mercury");
 console.log(planets); // ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptun']
 
 
@@ -126,4 +126,111 @@ console.log(planets); // ['Sun', 'Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter',
 
 
 
-// Internals
+// Performance
+
+// Methods push/pop run fast, while shift/unshift are slow.
+
+// Why?! Because shift/unshift requre not only one operation, but multiple to get executed, e.g shift operation:
+// 1. Remove the element with the index 0.
+// 2. Move all elements to the left, renumber them from the index 1 to 0, from 2 to 1 and so on.
+// 3. Update the length property.
+// The more elements in the array, the more time to move them, more in-memory operations.
+
+
+// Loops 
+
+
+// There are few options to cycle array items over indexes. one of the oldest one is for loop:
+
+let arr = ["Ball", "Bat", "Basket"];
+
+for (let i = 0; i < arr.length; i++) {
+    console.log(arr[i]); // prints array items
+}
+
+// but another way and more comfortable is for..of loop:
+
+let brands = ["Puma", "Nike", "Adidas"];
+
+for (let brand of brands) {
+    console.log(brand); // prints array items
+}
+
+// technically because array is object we can use for..in loop as well, but its a bad idea:
+
+for (let key in brands) {
+    console.log(arr[key]);   // prints array items
+}
+
+
+
+// A word about "length"
+
+// The length automatically updates when we modify the array, tbp its not a count of values, but the greatest numeric index 
+// plus one. 
+
+let animals = [];
+animals[999] = "Monkey";
+
+console.log(animals.length); // 1000, even if another 998 indexes are empty
+
+// another thing about length in arrays is that its writtable. nothing happens if increased manually, but if 
+// decreased, array is truncated/shortened and the process is irreversible:
+
+let nums = [90, 23, 76, 22, 55];
+nums.length = 2; // truncates array to 2 elements 
+console.log(nums); // [90, 23]
+
+nums.length = 5; // trying to extend array back to 5 elements
+console.log(nums); // [90, 23, empty x 3];
+
+// so, the simplest way to clear an array is to array.length = 0;
+
+
+
+// A word about "new Array()"
+
+let newArr = new Array(2);
+
+// if array called witha single argument which is number, then it creates an array without items, but with 
+// given argument as length of array itself:
+
+console.log(newArr[0]); // undefined, because no elements
+console.log(newArr.length); // length 2
+
+
+
+// Multidimensional arrays 
+
+// arrays can have items that are also arrays. Good example of that usage is matrix:
+
+let matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+];
+
+console.log(matrix [0][1]); // prints 2; [0] calls 1st array , [1] calls 2nd item in it.
+
+
+
+// toString
+
+// arrays have their own interpretation of toString method that returns a comma-separated list of elements:
+
+let arr1 = [1, 2, 3];
+
+console.log(arr1); // [1, 2, 3]
+console.log(String(arr1) === "1,2,3"); // true;
+console.log([] + 1); // 1
+console.log([1] + 1); // 11 
+// examples above executes that way because binary "+" operator adds and converts something to a string.
+
+
+
+
+// Dont compare arrays to ==
+
+// don’t use the == operator. Instead, compare them item-by-item in a loop or using iteration method, instead
+// use for..of loop to compare arrays item-by-item.
+
