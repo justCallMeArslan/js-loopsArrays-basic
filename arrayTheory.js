@@ -234,3 +234,52 @@ console.log([1] + 1); // 11
 // don’t use the == operator. Instead, compare them item-by-item in a loop or using iteration method, instead
 // use for..of loop to compare arrays item-by-item.
 
+
+
+// Array methods 
+
+// splice() is a method which can be called a jack of all trades. It can do insert, remove and replace elements.
+// the syntax is:
+
+// arr.splice(start, deleteCount, elem1, ..., elemN) - modifies arr starting from the index "start:" removes
+// deleteCount elements and then inserts elem1, ..., elemN at their place. Returns the array of removed 
+// elements.
+
+let arr2 = ["I", "study", "JavaScript", "right", "now"];
+
+arr2.splice(0, 3, "Let's", "sleep"); // replaces first 3 elements
+console.log(arr2); // [Lets, sleep, right, now]
+
+let removed = arr2.splice(0,2); // returns removed part
+console.log(removed); // [Lets, sleep]
+console.log(arr2);
+
+arr2.splice(0, 0, "I", "want", "to", "lay", "down", "and", 'sleep'); // - in order to insert without deletion 
+// set deleteCount to 0 (second parameter)
+console.log(arr2);
+
+let arr3 = [1, 2, 5]; 
+arr3.splice(-1, 0, 3, 4); // - negative values is acceptable (in this example -1 refers to 1 place before end)
+console.log(arr3); // [1, 2, 3, 4, 5]
+
+
+
+// slice() returns a new array copying to it all items from start to end, but not including end. Both start 
+// and end can be negative (functioning same way as str.slice(),but instead of substring it creates subarrays).
+// the syntax is:
+
+// arr.slice([start], ..., [end]);
+
+let arr4 = ["a", "b", "c", "d", "e"];
+console.log(arr4.slice(1,3)); // ["b", "c"]
+console.log(arr4.slice(-2)); // ["d", "e"] , -2 is a [start] and end of array considered as [end]
+
+// arr.slice() can be called without parameteres/arguments in order to create copy of orr for further 
+// transformation that should not affect the original array.
+
+// arr.concat(arg1, arg2, ..., argN);
+
+// concat() - creates a new array that includes values from other arrays and additional items. It accepts any
+// number of parameteres - either arrays or values. The result is a new array containing items from arr, then
+// adds arg1, arg2, etc. if any of arguments (argN) is an array then all its elements are copied into new array.
+
