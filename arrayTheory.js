@@ -60,7 +60,7 @@ let vegetables = ["Cucumber", "Tomato", "Onion"];
 console.log(vegetables[vegetables.length - 1]); // Onion
 
 // but now we have shorter syntax
-console.log(vegetables.at(-1));
+console.log(vegetables.at(-1)); // Onion
 
 
 // Methods pop/push, shift/unshift
@@ -410,10 +410,10 @@ console.log(users.findIndex(user => user.name == "Orlando")); // -1, Orlando is 
 // });
 
 let users1 = [
-    {id: 1, name: "Tod"},
-    {id: 2, name: "Ted"},
-    {id: 3, name: "Zach"}
-]   
+    { id: 1, name: "Tod" },
+    { id: 2, name: "Ted" },
+    { id: 3, name: "Zach" }
+]
 
 let someUsers = users1.filter(item => item.id <= 1);
 let someUsers1 = users1.filter(item => item.id > 1);
@@ -421,3 +421,177 @@ let someUsers1 = users1.filter(item => item.id > 1);
 console.log(someUsers); // [{"Tod"}]
 console.log(someUsers1); // [{"Ted"}, {"Zach"}]
 
+
+
+// Transform an array
+
+
+// map() - calls the function for each element of the array and returns the array of results.
+
+// let result = arr.map(function (item, index, array){ // - basic syntax
+//     // returns the item value instead of item
+// });
+
+let lengths = ["Croco", "Leo", "Tiger", "Bumblebee"];
+console.log(lengths.map(item => item.length)); // [5, 3, 5, 9]
+
+
+// sort(fn) - sorts the array in place , changing its element order. Default sorting order is lexicographic.
+
+let sortNum = [1, 15, 425, 2, 124];
+sortNum.sort();
+
+console.log(sortNum); // [1, 124, 15, 2, 425] - lexicographic order used, as we didnt set fn as arg to sort()
+
+function compareNumeric(a, b) {
+    if (a > b) return 1; // a moves after b
+    if (a == b) return 0; // stays same place
+    if (a < b) return -1; // a stays before b
+}
+
+let arr9 = [1, 24, 12, 7];
+
+arr9.sort(compareNumeric);
+
+console.log(arr9); //[1, 7, 12, 24]
+
+// if we want we can check what pairs created fot sorting and how they compared. Algorith may compare an element
+// with multiple other, but it tries to make as few comparisons as possible:
+
+let randomArr = [1, -2, 15, 2, 0, 8].sort(function (a, b) {
+    console.log(a + " <> " + b);  //-2 <> 1
+    // 15 <> 1
+    // 2 <> 1
+    // 2 <> 15
+    // 0 <> 2
+    // 0 <> 1
+    // 0 <> -2
+    // 8 <> 1
+    // 8 <> 15
+    // 8 <> 2
+
+    return a - b;
+
+});
+
+console.log(randomArr); // [-2, 0, 1, 2, 8, 15] 
+
+// arrow function can be used exactly the same way:
+
+let randomArrArrow = [1, -2, 15, 2, 0, 8].sort((a, b) => a - b);
+
+console.log(randomArrArrow); // [-2, 0, 1, 2, 8, 15] same result, but kind of shorter 
+
+
+// localeCompare() - method used to correctly sort letters, such as Ö for example:
+
+let countries = ["Österreich", "Andorra", "Vietnam", "Russland"];
+
+console.log(countries.sort((a, b) => a > b ? 1 : -1)); // Andorra, Russlan, Vietnam , Osterreich - wrong order
+console.log(countries.sort((a, b) => a.localeCompare(b))); // Andorra, Osterreich, Russland, Vietnam - correct
+
+
+// reverse() - reverse the order of elements in arr.
+
+let arr10 = [1, 2, 3, 4, 5];
+arr10.reverse();
+
+console.log(arr10); // [5, 4, 3, 2, 1]
+
+
+// split and join 
+
+// split(delim) - method that splits the string into an array by the given delimiter "delim".
+
+let names = "Aragorn, Aratorn, Tranduil, Gimli";
+
+let arr11 = names.split(", ");
+console.log(arr11); // ['Aragorn', 'Aratorn', 'Tranduil', 'Gimli']
+
+for (let name of arr11) {
+    console.log(`A message to ${name}.`); //A message to Aragorn. and so on with each name
+}
+
+// with empty delim
+
+let str = "test";
+console.log(str.split('')); // t,e,s,t
+
+let arr12 = 'Bilbo, Gandalf, Nazgul, Saruman'.split(', ', 2); // we can add limiter of array length and it will
+// cut and ignore extra elements
+console.log(arr12); // Bilbo, Gandalf
+
+
+// join(glue) - works oppositely to split(). it creates a string of arr items joined by glue betweem them:
+
+let arr13 = ["Bilbo", "Gandalf", "Nazgul"];
+let str2 = arr13.join("; "); // glue the array into a string using ;
+
+console.log(str2); //Bilbo; Gandalf; Nazgul
+
+
+//reduce/reduceRight - used to calculate single value based on the array. 
+// basic syntax: 
+
+// let value = arr.reduce(function (accumulator, item, index, array) {
+// 
+// }, [initial];
+
+// the function applied to all array elements one after another and "carries on" its result to the next call.
+// Arguments :
+// - accumulator is the result of previous function call, equals initial the first time(if initial is provided)
+// - item is the current array item
+// - is the position
+// - si the array
+
+let arr14 = [1, 2, 3, 4, 5];
+let result = arr14.reduce((sum, current) => sum + current, 0); // 0 is initial sum
+
+console.log(result); // 15
+
+// On the first run, sum is the initial value (the last argument of reduce), equals 0, and current is the 
+// first array element, equals 1. So the function result is 1.
+// On the second run, sum = 1, we add the second array element (2) to it and return.
+// On the 3rd run, sum = 3 and we add one more element to it, and so on.
+
+//reduceRight() does the same but goes from right to left
+
+
+// Array.isArray() - returns true if the value is an array, and false otherwise.
+
+console.log(typeof {}); // object
+console.log(typeof []); // object, because arrays based on objects.
+
+console.log(Array.isArray({})); // false 
+console.log(Array.isArray([])); // true
+
+
+// Most methods support "thisArg" - works the same way as this for function
+
+let army = {
+  minAge: 18,
+  maxAge: 27,
+  canJoin(user) {
+    return user.age >= this.minAge && user.age < this.maxAge;
+  }
+};
+
+let users3 = [
+  {age: 16},
+  {age: 20},
+  {age: 23},
+  {age: 30}
+];
+
+// find users, for who army.canJoin returns true
+let soldiers = users.filter(army.canJoin, army); // better to use - users.filter(user => army.canJoin(user))
+
+
+// If in the example above we used users.filter(army.canJoin), then army.canJoin would be called as a 
+// standalone function, with this = undefined, thus leading to an instant error.
+// A call to users.filter(army.canJoin, army) can be replaced with users.filter(user => army.canJoin(user)), 
+// that does the same. The latter is used more often, as it’s a bit easier to understand for most people.
+
+
+
+// TOP: Some examples of Array magic
