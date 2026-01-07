@@ -210,7 +210,7 @@ let matrix = [
     [7, 8, 9]
 ];
 
-console.log(matrix [0][1]); // prints 2; [0] calls 1st array , [1] calls 2nd item in it.
+console.log(matrix[0][1]); // prints 2; [0] calls 1st array , [1] calls 2nd item in it.
 
 
 
@@ -250,7 +250,7 @@ let arr2 = ["I", "study", "JavaScript", "right", "now"];
 arr2.splice(0, 3, "Let's", "sleep"); // replaces first 3 elements
 console.log(arr2); // [Lets, sleep, right, now]
 
-let removed = arr2.splice(0,2); // returns removed part
+let removed = arr2.splice(0, 2); // returns removed part
 console.log(removed); // [Lets, sleep]
 console.log(arr2);
 
@@ -258,7 +258,7 @@ arr2.splice(0, 0, "I", "want", "to", "lay", "down", "and", 'sleep'); // - in ord
 // set deleteCount to 0 (second parameter)
 console.log(arr2);
 
-let arr3 = [1, 2, 5]; 
+let arr3 = [1, 2, 5];
 arr3.splice(-1, 0, 3, 4); // - negative values is acceptable (in this example -1 refers to 1 place before end)
 console.log(arr3); // [1, 2, 3, 4, 5]
 
@@ -271,15 +271,73 @@ console.log(arr3); // [1, 2, 3, 4, 5]
 // arr.slice([start], ..., [end]);
 
 let arr4 = ["a", "b", "c", "d", "e"];
-console.log(arr4.slice(1,3)); // ["b", "c"]
+console.log(arr4.slice(1, 3)); // ["b", "c"]
 console.log(arr4.slice(-2)); // ["d", "e"] , -2 is a [start] and end of array considered as [end]
 
 // arr.slice() can be called without parameteres/arguments in order to create copy of orr for further 
 // transformation that should not affect the original array.
 
-// arr.concat(arg1, arg2, ..., argN);
+
 
 // concat() - creates a new array that includes values from other arrays and additional items. It accepts any
 // number of parameteres - either arrays or values. The result is a new array containing items from arr, then
 // adds arg1, arg2, etc. if any of arguments (argN) is an array then all its elements are copied into new array.
+
+// arr.concat(arg1, arg2, ..., argN); - bsic syntax
+
+let arr5 = [1, 2];
+
+console.log(arr5.concat([3, 4])); // [1, 2, 3, 4]
+console.log(arr5.concat([3, 4], [5, 6])); // [1, 2, 3, 4, 5, 6]
+console.log(arr5.concat([3, 4], 5, 6)); // [1, 2, 3, 4, 5, 6]
+
+// normally, it only copies elements from arrays and other objects, even if they look like arrays. are added as
+// a whole:
+
+let arr6 = [1, 2];
+
+let arrayLike = {
+    0: "something",
+    length: 1
+};
+
+console.log(arr6.concat(arrayLike)); // [1, 2, {object}]
+
+
+
+// Iterate: forEach
+
+// arr.forEach() method allows to run a function for every element of the array.
+
+// arr.forEach(function(item, index, array){ ... do something with an item }); - basic syntax
+
+["Bilbo", "Gandalf", "Tranduil"].forEach(console.log); // - log each item in array
+// Bilbo 0 (3) ['Bilbo', 'Gandalf', 'Tranduil']
+// Gandalf 1 (3) ['Bilbo', 'Gandalf', 'Tranduil']
+// Tranduil 2 (3) ['Bilbo', 'Gandalf', 'Tranduil']
+
+
+["Bilbo", "Gandalf", "Aragorn"].forEach((item, index, array) => {// - detailed log and format into readable text
+    console.log(`${item} is at index ${index} in ${array}.`);
+    // Bilbo is at index 0 in Bilbo,Gandalf,Aragorn.
+    // Gandalf is at index 1 in Bilbo,Gandalf,Aragorn.
+    // Aragorn is at index 2 in Bilbo,Gandalf,Aragorn.
+})
+
+
+
+// Searching in array
+
+// indexOf/lastIndexOf and includes
+// the methods arr.indexOf and arr.includes have the similar syntax and do essentialy same as their string 
+// counerparts, but operate on items instead of characters
+
+// arr.indexOf(item, from) - baic syntax, looks for item starting from index from, and returns the index where
+// it was found, otherwise -1
+
+// arr.includes(item, form) - basic syntax, looks for item starting from index from, returns true if found
+
+// usually, these methods are used with only one argument: the item to search. by default search is from
+// beginning.
+
 
