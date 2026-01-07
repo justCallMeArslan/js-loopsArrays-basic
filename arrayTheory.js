@@ -341,3 +341,83 @@ console.log(arr6.concat(arrayLike)); // [1, 2, {object}]
 // beginning.
 
 
+
+let arr7 = [1, 0, false];
+
+console.log(arr7.indexOf(0)); // 1
+console.log(arr7.indexOf(false)); // 2
+console.log(arr7.indexOf(null)); // -1 , because it wasnt found in array
+
+// important to know that indexOf uses the strict equality === for comparison. So, if we look for false, it 
+// finds exactly false and not the zero.
+
+console.log(arr7.indexOf(true)); // -1, was not found in array
+
+// to check if item exists in the array and doesnt need the index - arr.includes is preffered to use:
+
+console.log(arr7.includes(0)); // true
+console.log(arr7.includes(false)); // true
+console.log(arr7.includes(true)); // false
+
+// also we have arr.lastIndexOf() method, which is the same as indexOf(), but looks for from right to left:
+
+let vegetables1 = ["Cucumber", "Tomato", "Beat", "Tomato"];
+console.log(vegetables1.lastIndexOf("Tomato")); // 3
+console.log(vegetables1.indexOf("Tomato")); // 1
+
+// noteworthy to mention that arr.includes correctly handles NaN, unlike indexOf():
+
+const arr8 = [NaN];
+console.log(arr8.indexOf(NaN)); // -1, not found
+console.log(arr8.includes(NaN)); // true
+
+
+
+// find and findIndex/findLastIndex
+
+
+// arr.find(fn) - method to find an object with specific conditions.
+// basic syntax:
+
+// let result = arr.find(function(item, index, array){
+// if true is returned, item is returned and iteration is stopped
+// for falsy scenario returns undefined 
+//});
+
+// function is called for elements of the array, one after another:
+// - item is element
+// - index is the index 
+// array is the array itself 
+
+let users = [
+    { id: 1, name: "John" },
+    { id: 2, name: "Pete" },
+    { id: 3, name: "Louis" },
+    { id: 4, name: "John" }
+];
+
+console.log(users.findIndex(user => user.name == "John")); // 0 is the position of first John in array
+console.log(users.findLastIndex(user => user.name == "John")); // 3 is the position of last John in array
+console.log(users.findIndex(user => user.name == "Orlando")); // -1, Orlando is not found in the array
+
+
+// filter(fn) is the method that looks for multiple elements and returns all matching elements.
+// basic syntax:
+
+// let results = arr.filter(function(item, index, array){
+// if true, items is pushed to results and iteration continues
+// returns empty array if nothing found
+// });
+
+let users1 = [
+    {id: 1, name: "Tod"},
+    {id: 2, name: "Ted"},
+    {id: 3, name: "Zach"}
+]   
+
+let someUsers = users1.filter(item => item.id <= 1);
+let someUsers1 = users1.filter(item => item.id > 1);
+
+console.log(someUsers); // [{"Tod"}]
+console.log(someUsers1); // [{"Ted"}, {"Zach"}]
+
