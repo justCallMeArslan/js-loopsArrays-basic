@@ -200,7 +200,7 @@ function sumInput() {
     return sum;
 }
 
-console.log(sumInput());
+// console.log(sumInput()); // uncomment to call the function
 
 
 
@@ -224,4 +224,219 @@ console.log(sumInput());
 // getMaxSubSum([-1, -2, -3]) = 0
 
 // Please try to think of a fast solution: O(n2) or even O(n) if you can.
+
+
+
+// Translate border-left-width to borderLeftWidth
+
+// Write the function camelize(str) that changes dash-separated words like “my-short-string” into camel-cased 
+// “myShortString”.
+// That is: removes all dashes, each word after dash becomes uppercased.
+
+// Examples:
+// camelize("background-color") == 'backgroundColor';
+// camelize("list-style-image") == 'listStyleImage';
+// camelize("-webkit-transition") == 'WebkitTransition';
+// P.S. Hint: use split to split the string into an array, transform it and join back.
+
+function camelize(str) {
+    return str
+        .split("-")
+        .map((word, index) => index == 0 ? word : word[0].toUpperCase() + word.slice(1))
+        // we give argument word and index as a position
+        // add conditional check: 
+        // - if position == 0 -> put word as it is
+        // - if position != 0 -> take all word's (which are not at position 0) first letter and and make its
+        // first letter upper case, add to this capital letter word without first letter
+        .join("");
+
+}
+
+console.log(camelize("background-color"));
+console.log(camelize("i-want-to-eat-something-delicious"));
+
+
+// Filter range
+
+// Write a function filterRange(arr, a, b) that gets an array arr, looks for elements with values higher or 
+// equal to a and lower or equal to b and return a result as an array.
+// The function should not modify the array. It should return the new array.
+
+// For instance:
+
+// let arr = [5, 3, 8, 1];
+// let filtered = filterRange(arr, 1, 4);
+
+// alert( filtered ); // 3,1 (matching values)
+// alert( arr ); // 5,3,8,1 (not modified)
+
+let array = [25, 13, 29, 40, 8, 16, 3, 12];
+
+function filterRange(arr, a, b) {
+    return arr
+        .filter(item => a < item && item < b)
+        .sort((a, b) => {
+            return a - b
+        });
+
+
+}
+
+let filtered = filterRange(array, 10, 27);
+
+console.log(array);
+console.log(filtered);
+
+
+// Filter range "in place"
+
+// Write a function filterRangeInPlace(arr, a, b) that gets an array arr and removes from it all values except 
+// those that are between a and b. The test is: a ≤ arr[i] ≤ b.
+// The function should only modify the array. It should not return anything.
+
+// For instance:
+
+// let arr = [5, 3, 8, 1];
+
+// filterRangeInPlace(arr, 1, 4); // removed the numbers except from 1 to 4
+// alert( arr ); // [3, 1]
+
+
+let arr1 = [5, 3, 8, 1];
+
+function filterRangeInPlace1(arr, a, b) {
+    let filtered = arr.filter(item => item < a || b > item);
+    arr.length = 0;
+    arr.push(filtered);
+};
+
+filterRangeInPlace1(arr1, 1, 4);
+console.log(arr1);
+
+//or 
+
+let arr2 = [5, 3, 8, 1];
+
+function filterRangeInPlace2(arr, a, b) {
+
+    for (let i = 0; i < arr.length; i++) { // loop through array until it ends 
+        let val = arr[i]; // // value at position 0, 1, etc
+
+        // remove if outside of the interval
+        if (val < a || val > b) {
+            arr.splice(i, 1); // if true remove 1 element at postion i 
+            i--; //move 1 index back (because i++ as a part of loop and next number in array will be skipped as 
+            // position will shift to 1, instead of returning back to 0 for another check)
+        }
+    }
+
+}
+
+filterRangeInPlace2(arr2, 1, 4);
+console.log(arr2);
+
+// or
+
+let arr3 = [5, 3, 8, 1];
+
+function filterRangeInPlace3(arr, a, b) {
+    arr.splice(
+        0, // start with first item
+        arr.length, // remove entire array 
+        arr.filter(val => val < a || b > val) // push filtered items into array
+    );
+}
+
+filterRangeInPlace3(arr3, 1, 4);
+console.log(arr3);
+
+
+// Sort in decreasing order
+
+let arr4 = [5, 2, 1, -10, 8];
+
+arr4.sort((a, b) => b - a);
+
+console.log(arr4); // 8, 5, 2, 1, -10
+
+
+// Copy and sort array
+// We have an array of strings arr. We’d like to have a sorted copy of it, but keep arr unmodified.
+
+// Create a function copySorted(arr) that returns such a copy.
+
+
+function copySorted(arr) {
+    return [...arr].sort(); // another option is arr.slice().sort(); [...arr] copies original array, same as 
+    // slice() with empty arguments
+}
+
+let arr5 = ["HTML", "JavaScript", "CSS"];
+let sorted = copySorted(arr5);
+
+console.log(sorted); // CSS, HTML, JavaScript
+console.log(arr5); // HTML, JavaScript, CSS (no changes)
+
+
+// Shuffle an array
+// Write the function shuffle(array) that shuffles (randomly reorders) elements of the array.
+
+// Multiple runs of shuffle may lead to different orders of elements. For instance:
+
+let array1 = [1, 2, 3];
+
+// shuffle(arr);
+// arr = [3, 2, 1]
+
+// shuffle(arr);
+// arr = [2, 1, 3]
+
+// shuffle(arr);
+// arr = [3, 1, 2]
+// // ...
+// All element orders should have an equal probability. For instance, [1,2,3] can be reordered as [1,2,3] or 
+// [1,3,2] or [3,1,2] etc, with equal probability of each case.
+
+function shuffle(array) {
+    array.sort(() => Math.random() - 0.5);
+}
+shuffle(array1);
+console.log
+
+
+// Filter unique array members
+
+// Let arr be an array.
+// Create a function unique(arr) that should return an array with unique items of arr.
+
+function unique(arr) {
+    return [...new Set(arr)].sort((a, b) => a - b);
+}
+
+let strings = ["Hare", "Krishna", "Hare", "Krishna",
+    "Krishna", "Krishna", "Hare", "Hare", ":-O"
+];
+
+let cars = ["BWM", "Audi", "Audi", "BWM", "Renault", "Peugeot", "Renault"];
+
+console.log(unique(strings)); // Hare, Krishna, :-O
+console.log(unique(cars));
+
+
+// or 
+
+function unique(arr) {
+    let result = []; // setting result as a copy (empty) string
+
+    for (let str of arr) { // looping through array to check for every item
+        if (!result.includes(str)) { // if item passed doesnt exit in result 
+            result.push(str); // push it to result 
+        }
+    }
+
+    return result; // returns new array which contains only unique items
+}
+
+console.log(unique(cars));
+console.log(unique(strings));
 

@@ -586,7 +586,6 @@ let users3 = [
 // find users, for who army.canJoin returns true
 let soldiers = users.filter(army.canJoin, army); // better to use - users.filter(user => army.canJoin(user))
 
-
 // If in the example above we used users.filter(army.canJoin), then army.canJoin would be called as a 
 // standalone function, with this = undefined, thus leading to an instant error.
 // A call to users.filter(army.canJoin, army) can be replaced with users.filter(user => army.canJoin(user)), 
