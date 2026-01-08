@@ -569,18 +569,18 @@ console.log(Array.isArray([])); // true
 // Most methods support "thisArg" - works the same way as this for function
 
 let army = {
-  minAge: 18,
-  maxAge: 27,
-  canJoin(user) {
-    return user.age >= this.minAge && user.age < this.maxAge;
-  }
+    minAge: 18,
+    maxAge: 27,
+    canJoin(user) {
+        return user.age >= this.minAge && user.age < this.maxAge;
+    }
 };
 
 let users3 = [
-  {age: 16},
-  {age: 20},
-  {age: 23},
-  {age: 30}
+    { age: 16 },
+    { age: 20 },
+    { age: 23 },
+    { age: 30 }
 ];
 
 // find users, for who army.canJoin returns true
@@ -595,3 +595,41 @@ let soldiers = users.filter(army.canJoin, army); // better to use - users.filter
 
 
 // TOP: Some examples of Array magic
+
+// Let’s consider a sumOfTripledEvens function. It will:
+
+// Take in an array.
+// For every even number, it will triple it.
+// Then it will sum all those even numbers.
+
+function sumOfTripledEvens0(array) {
+    let sum = 0;
+
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] % 2 === 0) {  // Step 1: If the element is an even number
+            const tripleEvenNumber = array[i] * 3;  // Step 2: Multiply this number by three
+            sum += tripleEvenNumber; // Step 3: Add the new number to the total
+        }
+    }
+    return sum;
+}
+
+
+function sumOfTripledEvens(array) {
+    const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const filteredArr = arr.filter(item => item % 2 === 0);
+    const mappedArr = filteredArr.map((item) => item * 3);
+    const reducedArr = mappedArr.reduce((sum, current) => sum + current, 0);
+
+}
+
+sumOfTripledEvens();
+
+// or we can write it in more laconically
+
+// function sumOfTripledEvens(array) {
+//   return array
+//     .filter((num) => num % 2 === 0)
+//     .map((num) => num * 3)
+//     .reduce((acc, curr) => acc + curr);
+// };
