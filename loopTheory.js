@@ -367,3 +367,20 @@ outer: for (let k = 0; k < 3; k++) {
 
 console.log("Done!");
 
+
+
+// cheat sheet of loops vs built-in methods
+
+// | Task / Operation             | Loop                     | Built-in Method                     | Better Data Structure / Logic | Notes                                                          |
+// | ---------------------------- | ------------------------ | ----------------------------------- | ----------------------------- | -------------------------------------------------------------- |
+// | **Iterate all elements**     | `for`, `while`, `for…of` | `.forEach()`, `.map()`, `.filter()` | —                             | Loops = explicit control, Built-in = cleaner syntax; both O(n) |
+// | **Transform array**          | Manual loop with push    | `.map()`                            | —                             | Both O(n); `.map()` is cleaner, functional                     |
+// | **Filter array**             | Manual loop with if      | `.filter()`                         | —                             | Both O(n); `.filter()` is readable                             |
+// | **Sum / reduce**             | Loop with accumulator    | `.reduce()`                         | —                             | Both O(n); `.reduce()` concise, avoids errors                  |
+// | **Check if element exists**  | Loop + `if`              | `.includes()`                       | **Set**                       | Loop/.includes → O(n), Set → O(1)                              |
+// | **Remove multiple items**    | Loop + `splice`          | `.filter()`                         | **Set + filter**              | Without Set → O(n*r), With Set → O(n+r)                        |
+// | **Insert at start**          | Loop shift               | —                                   | **LinkedList / Deque**        | Arrays = O(n), LinkedList = O(1)                               |
+// | **Random access by index**   | —                        | —                                   | **Array**                     | Always O(1)                                                    |
+// | **Search by key**            | Loop + if                | `.find()`                           | **Map/Object**                | Loop/find → O(n), Map/Object → O(1)                            |
+// | **Nested loops / all pairs** | `for i` + `for j`        | —                                   | **Depends on algorithm**      | O(n²); use smarter algorithms if possible                      |
+// | **Divide and conquer**       | Recursive loop           | —                                   | —                             | Often reduces O(n²) → O(n log n)                               |
